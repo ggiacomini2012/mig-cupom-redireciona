@@ -12,6 +12,7 @@
         <p></p>
         
         <div class="cupom-box" id="cupom-box">Clique para copiar: <span id="cupom-text">guilhermemig</span></div>
+        <p id="copy-feedback" style="font-size: 12px; color: red; margin-top: 5px; display: none;"></p>
         
         <div class="instructions">
             <p><strong>Como usar meu cupom:</strong></p>
@@ -29,29 +30,56 @@
     </div>
 
     <script>
-        // Função para copiar o cupom
-        document.getElementById('cupom-box').addEventListener('click', function() {
-            const cupomText = 'guilhermemig';
-            
-            // Cria um elemento de input temporário
-            const tempInput = document.createElement('input');
-            tempInput.value = cupomText;
-            document.body.appendChild(tempInput);
-            
-            // Seleciona e copia o texto
-            tempInput.select();
-            document.execCommand('copy');
-            
-            // Remove o input temporário
-            document.body.removeChild(tempInput);
-            
-            // Ativa a animação maluca
-            this.classList.add('copied');
-            
-            // Remove a animação após 3 segundos
-            setTimeout(() => {
-                this.classList.remove('copied');
-            }, 3000);
+        const cupomBox = document.getElementById('cupom-box');
+        const cupomText = 'guilhermemig';
+        const feedbackElement = document.getElementById('copy-feedback');
+
+        cupomBox.addEventListener('click', function() {
+            feedbackElement.style.display = 'none'; // Reseta a mensagem
+            feedbackElement.textContent = '';
+
+            // Verifica se a API Clipboard está disponível e se o contexto é seguro (HTTPS)
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(cupomText).then(() => {
+                    // Sucesso na cópia
+                    this.classList.add('copied');
+                    setTimeout(() => {
+                        this.classList.remove('copied');
+                    }, 3000);
+                }).catch(err => {
+                    // Falha ao copiar (permissão negada, etc.)
+                    console.error('Falha ao copiar com navigator.clipboard:', err);
+                    feedbackElement.textContent = 'Falha ao copiar. Tente selecionar e copiar manualmente.';
+                    feedbackElement.style.display = 'block';
+                    // Opcional: remover o cursor pointer para indicar seleção
+                    // this.style.cursor = 'text'; 
+                });
+            } else {
+                // Fallback para iOS antigo ou HTTP (ou navegadores sem suporte)
+                // Tenta o método antigo (pode funcionar em alguns casos, mas menos confiável)
+                try {
+                    const tempInput = document.createElement('input');
+                    tempInput.value = cupomText;
+                    document.body.appendChild(tempInput);
+                    tempInput.select();
+                    document.execCommand('copy'); // Pode não funcionar no iOS moderno
+                    document.body.removeChild(tempInput);
+                    
+                    // Se chegou aqui, o método antigo funcionou
+                    this.classList.add('copied');
+                    setTimeout(() => {
+                        this.classList.remove('copied');
+                    }, 3000);
+
+                } catch (err) {
+                     // Método antigo também falhou
+                    console.error('Falha ao copiar com document.execCommand:', err);
+                    feedbackElement.textContent = 'Não foi possível copiar automaticamente. Por favor, selecione e copie o cupom acima.';
+                    feedbackElement.style.display = 'block';
+                    // Opcional: remover o cursor pointer para indicar seleção
+                    // this.style.cursor = 'text'; 
+                }
+            }
         });
     </script>
 </body>
