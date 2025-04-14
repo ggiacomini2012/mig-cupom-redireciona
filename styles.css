@@ -197,3 +197,81 @@ body {
         padding: 10px 25px;
     }
 }
+
+/* Estilo animado para o input de teste */
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0turn;
+}
+
+#test-paste-input {
+  width: 80%; /* Mantém a largura responsiva */
+  max-width: 350px; /* Limita a largura máxima */
+  padding: 12px 20px; /* Altura controlada pelo padding */
+  margin-top: 20px;
+  color: rgb(0, 0, 0);
+  /* text-shadow: 0 1px 0 #111; */
+  background: none; /* Remove background padrão do input */
+  border: solid 3px transparent; /* Espessura da borda */
+  border-radius: 1.5em; /* Raio da borda */
+  box-sizing: border-box;
+  
+  --border-angle: 0turn; /* For animation. */
+  --main-bg: conic-gradient(
+      from var(--border-angle),
+      rgb(140, 129, 151),
+      rgb(183, 183, 226) 5%,
+      rgb(183, 183, 207) 60%,
+      rgb(188, 177, 199) 95%
+    );
+  --gradient-border: conic-gradient(from var(--border-angle), transparent 25%, #08f, #f03 99%, transparent);
+  
+  background:
+    var(--main-bg) padding-box, /* Fundo interno */
+    var(--gradient-border) border-box, /* Borda gradiente */
+    var(--main-bg) border-box; /* Fundo atrás da borda */
+
+  background-position: center center;
+
+  animation: bg-spin 3s linear infinite;
+}
+
+#test-paste-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  text-shadow: none;
+}
+
+#test-paste-input:focus {
+  outline: none; /* Remove outline padrão no foco */
+  /* Opcional: Pausar animação no foco também */
+  /* animation-play-state: paused; */
+}
+
+#test-paste-input:hover {
+  animation-play-state: paused;
+}
+
+@keyframes bg-spin {
+  to {
+    --border-angle: 1turn;
+  }
+}
+
+/* Certifique-se que a media query para mobile ajuste a largura se necessário */
+@media (max-width: 480px) {
+     h1 {
+        font-size: 20px;
+    }
+    .cupom-box {
+        font-size: 18px;
+    }
+    .btn {
+        font-size: 15px;
+        padding: 10px 25px;
+    }
+    #test-paste-input {
+      width: 90%; /* Ajusta largura em telas pequenas */
+      padding: 10px 15px;
+    }
+}
