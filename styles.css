@@ -1,0 +1,199 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #2c3e50;
+}
+.container {
+    text-align: center;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    padding: 40px;
+    max-width: 600px;
+    width: 90%;
+    animation: fadeIn 0.5s ease-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.cupom-box {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    margin: 25px auto;
+    width: fit-content;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    transform-style: preserve-3d;
+}
+.cupom-box:hover {
+    transform: scale(1.05);
+}
+.cupom-box.copied {
+    animation: 
+        crazyColors 0.5s infinite alternate,
+        dance 1s ease infinite alternate;
+}
+@keyframes crazyColors {
+    0% { background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%); }
+    20% { background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%); }
+    40% { background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); }
+    60% { background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); }
+    80% { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    100% { background: linear-gradient(135deg, #ffc3a0 0%, #ffafbd 100%); }
+}
+@keyframes dance {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    25% { transform: translateY(-20px) rotate(5deg); }
+    50% { transform: translateY(0) rotate(0); }
+    75% { transform: translateY(-10px) rotate(-5deg); }
+}
+.cupom-box.copied::after {
+    content: '✔ Copiado! ✨';
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #4CAF50;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 16px;
+    animation: fadeOut 2s forwards;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.7);
+}
+@keyframes fadeOut {
+    0% { opacity: 1; transform: translateX(-50%) scale(1.2); }
+    100% { opacity: 0; transform: translateX(-50%) scale(0.8); display: none; }
+}
+.btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 18px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 20px;
+    display: inline-block;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+.instructions {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Shine effect for instructions */
+.instructions::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(110deg, transparent 25%, rgba(255, 255, 255, 0.4) 50%, transparent 75%);
+    transform: translateX(-100%);
+    animation: shine 3s linear infinite;
+}
+
+@keyframes shine {
+    to {
+        transform: translateX(100%);
+    }
+}
+
+.highlight {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* --- Estilos para Mobile (Telas até 768px) --- */
+@media (max-width: 768px) {
+    body {
+        /* Ajustar o alinhamento se necessário em telas menores */
+        align-items: flex-start; 
+        padding-top: 20px; 
+        min-height: calc(100vh - 20px); /* Ajuste para padding */
+    }
+
+    .container {
+        padding: 25px;
+        width: 95%;
+        margin-top: 20px; /* Adiciona margem no topo */
+        margin-bottom: 20px; /* Adiciona margem no fundo */
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    h1 { /* Supondo que você tenha um h1 */
+        font-size: 24px; 
+    }
+
+    .cupom-box {
+        font-size: 22px;
+        padding: 12px;
+        margin: 20px auto;
+    }
+
+    .cupom-box.copied {
+        /* Simplificar ou remover animações complexas se desejado */
+        animation: 
+            crazyColors 0.5s infinite alternate,
+            dance 1s ease infinite alternate; /* Removida rotate3d */
+    }
+
+    /* Ajuste da posição do tooltip copiado para mobile */
+    .cupom-box.copied::after {
+        font-size: 14px;
+        padding: 4px 10px;
+        top: -30px; 
+    }
+
+    .btn {
+        font-size: 16px;
+        padding: 12px 30px;
+        width: 80%; /* Faz o botão ocupar mais largura */
+        box-sizing: border-box; /* Garante que padding não aumente a largura total */
+    }
+
+    .instructions {
+        font-size: 14px;
+        padding: 12px;
+    }
+}
+
+/* --- Ajustes menores para Telas Muito Pequenas (Opcional) --- */
+@media (max-width: 480px) {
+     h1 {
+        font-size: 20px;
+    }
+    .cupom-box {
+        font-size: 18px;
+    }
+    .btn {
+        font-size: 15px;
+        padding: 10px 25px;
+    }
+}

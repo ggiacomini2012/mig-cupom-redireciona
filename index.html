@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guilherme Indica - Made in Guarda</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🛍️ Obrigado por comprar com meu cupom!</h1>
+        <p></p>
+        
+        <div class="cupom-box" id="cupom-box">Clique para copiar: <span id="cupom-text">guilhermemig</span></div>
+        
+        <div class="instructions">
+            <p><strong>Como usar meu cupom:</strong></p>
+            <ol>
+                <li>Finalize sua compra normalmente</li>
+                <li>Na página de pagamento, procure por <span class="highlight">"Cupom de desconto"</span></li>
+                <li>Cole ou digite: <span class="highlight">guilhermemig</span></li>
+                <li>Se não houver desconto, você <span class="highlight">não paga nada a mais</span> e ainda me ajuda!</li>
+            </ol>
+        </div>
+        
+        <a href="https://www.madeinguarda.com.br" class="btn">Ir para o site agora</a>
+        
+        <p style="margin-top: 30px; font-size: 14px; color: #7f8c8d;">Cupom afiliado - Guilherme agradece sua ajuda! ❤️</p>
+    </div>
+
+    <script>
+        // Função para copiar o cupom
+        document.getElementById('cupom-box').addEventListener('click', function() {
+            const cupomText = 'guilhermemig';
+            
+            // Cria um elemento de input temporário
+            const tempInput = document.createElement('input');
+            tempInput.value = cupomText;
+            document.body.appendChild(tempInput);
+            
+            // Seleciona e copia o texto
+            tempInput.select();
+            document.execCommand('copy');
+            
+            // Remove o input temporário
+            document.body.removeChild(tempInput);
+            
+            // Ativa a animação maluca
+            this.classList.add('copied');
+            
+            // Remove a animação após 3 segundos
+            setTimeout(() => {
+                this.classList.remove('copied');
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
