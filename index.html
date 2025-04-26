@@ -89,7 +89,7 @@
         // Verifica o hash da URL e atualiza o href do botão se necessário
         const btn = document.querySelector('.btn');
         if (window.location.hash) {
-            const hash = '/' + window.location.hash;
+            const hash = '/' + window.location.hash.substring(1); // Remove o # do hash
             btn.href = 'https://www.madeinguarda.com.br' + hash;
         }
     </script>
