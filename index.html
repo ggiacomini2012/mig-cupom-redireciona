@@ -24,7 +24,9 @@
             </ol>
         </div>
         
-        <a href="https://www.madeinguarda.com.br" class="btn">Ir para o site agora</a>
+        <!-- com.br plus hash url parameter exemplo: https://www.madeinguarda.com.br/saias -->
+         <!-- site plus this web site adress plus the hash url parameter -->
+        <a href="https://www.madeinguarda.com.br$(/)" class="btn">Ir para o site agora</a>
         
         <input type="text" id="test-paste-input" placeholder="Cole aqui para testar" aria-label="Campo para testar cupom colado">
         
@@ -83,6 +85,13 @@
                 }
             }
         });
+
+        // Verifica o hash da URL e atualiza o href do botão se necessário
+        const btn = document.querySelector('.btn');
+        if (window.location.hash) {
+            const hash = '/' + window.location.hash;
+            btn.href = 'https://www.madeinguarda.com.br' + hash;
+        }
     </script>
 </body>
 </html>
